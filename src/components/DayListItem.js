@@ -9,7 +9,7 @@ const formatSpots = (spots) => {
 	else return `${spots} spots`;
 };
 
-export default function DayListItem(props) {
+function DayListItem(props) {
 	const dayClass = classNames('day-list__item', {
 		'day-list__item--selected': props.selected,
 		'day-list__item--full': props.spots === 0,
@@ -22,3 +22,5 @@ export default function DayListItem(props) {
 		</li>
 	);
 }
+
+export default DayListItem;
