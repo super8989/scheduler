@@ -13,20 +13,4 @@ export default function DayList(props) {
 			setDay={props.setDay}
 		/>
 	));
-
-	// const list = days.map((day) => {
-	// 	const { id, name, spots } = day;
-
-	// 	return (
-	// 		<DayListItem
-	// 			key={id}
-	// 			name={name}
-	// 			spots={spots}
-	// 			selected={name === props.day}
-	// 			setDay={props.setDay}
-	// 		/>
-	// 	);
-	// });
-
-	// return <ul>{list}</ul>;
 }
