@@ -16,11 +16,13 @@ function Appointment(props) {
 				<Show
 					student={interview.student}
 					interviewer={interview.interviewer}
-					onEdit
-					onDelete
+					// onEdit
+					// onDelete
 				/>
 			) : (
-				<Empty onAdd />
+				<Empty
+				// onAdd
+				/>
 			)}
 		</article>
 	);
