@@ -85,12 +85,8 @@ function Application(props) {
 				/>
 			</section>
 			<section className='schedule'>
-				{appointments.map((item) => (
-					<Appointment
-						key={item.id}
-						time={item.time}
-						interview={item.interview}
-					/>
+				{appointments.map((appointment) => (
+					<Appointment key={appointment.id} {...appointment} />
 				))}
 				<Appointment key={'last'} time={'5PM'} />
 			</section>
