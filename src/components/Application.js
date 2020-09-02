@@ -48,17 +48,25 @@ const appointments = [
 		id: 4,
 		time: '3pm',
 		interview: {
-			student: 'James Smith',
+			student: 'Archie Cohen',
 			interviewer: {
-				id: 3,
-				name: 'Mildred Nazir',
-				avatar: 'https://i.imgur.com/T2WwVfS.png',
+				id: 2,
+				name: 'Tori Malcom',
+				avatar: 'https://i.imgur.com/Nmx0Qxo.png',
 			},
 		},
 	},
 	{
 		id: 5,
 		time: '4pm',
+		interview: {
+			student: 'Maria Boucher',
+			interviewer: {
+				id: 3,
+				name: 'Mildren Nazir',
+				avatar: 'https://i.imgur.com/T2WwVfS.png',
+			},
+		},
 	},
 ];
 
