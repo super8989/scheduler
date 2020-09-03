@@ -6,6 +6,17 @@ export function getAppointmentsForDay(state, day) {
 		const appointments = selectedDayObj.appointments.map(
 			(appointmentsId) => state.appointments[appointmentsId]
 		);
-		return appointments;
+		return appointments; // [array of {state.appointments} objects for the {day}]
+	}
+}
+
+// interview = {student: 'name', interviewer: id}
+export function getInterview(state, interview) {
+	if (!interview) return null;
+	else {
+		const interviewersList = state.interviewers; // {}
+		const interviewerId = interview.interviewer;
+
+		return { ...interview, interviewer: interviewersList[interviewerId] }; // {student: 'name', interviewer: {id, name, avatar} }
 	}
 }
