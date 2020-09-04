@@ -3,7 +3,11 @@ import axios from 'axios';
 
 import DayList from 'components/DayList';
 import Appointment from 'components/Appointment';
-import { getAppointmentsForDay, getInterview } from 'helpers/selectors';
+import {
+	getAppointmentsForDay,
+	getInterview,
+	getInterviewersForDay,
+} from 'helpers/selectors';
 
 import 'components/Application.scss';
 
@@ -62,15 +66,14 @@ function Application(props) {
 			<section className='schedule'>
 				{/* {console.log('state.appointments', state.appointments)}
 				{console.log('state.interviewers', state.interviewers)} */}
-
 				{getAppointmentsForDay(state, state.day).map((appointment) => {
-					// console.log('getInterview interview', interview);
-					// console.log('appointment', appointment);
+					// console.log('getInterview interview', interview); console.log('appointment', appointment);
 					return (
 						<Appointment
 							{...appointment}
 							key={appointment.id}
 							interview={getInterview(state, appointment.interview)}
+							interviewers={getInterviewersForDay(state, state.day)}
 						/>
 					);
 				})}
