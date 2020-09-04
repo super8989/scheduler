@@ -12,9 +12,6 @@ import {
 import 'components/Application.scss';
 
 function Application(props) {
-	// const [today, setToday] = useState('Monday');
-	// const [days, setDays] = useState([]);
-
 	const [state, setState] = useState({
 		day: 'Monday',
 		days: [],
@@ -22,7 +19,7 @@ function Application(props) {
 		interviewers: {},
 	});
 
-	const setDay = (day) => setState({ ...state, day });
+	const setDay = (day) => setState((prevState) => ({ ...prevState, day }));
 	// const setDays = (days) => setState((prev) => ({ ...prev, days }));
 
 	// const daysData = axios.get('/api/days');
