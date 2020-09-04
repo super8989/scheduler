@@ -20,17 +20,11 @@ function Appointment(props) {
 		<article className='appointment'>
 			<Header time={time} />
 			{/* {interview ? (<Show student={interview.student} interviewer={interview.interviewer} onEdit onDelete />) : (<Empty onAdd/> )} */}
-			{mode === EMPTY && (
-				<Empty
-					onAdd={() => {
-						transition(CREATE);
-					}}
-				/>
-			)}
+			{mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
 			{mode === SHOW && (
 				<Show student={interview.student} interviewer={interview.interviewer} />
 			)}
-			{mode === CREATE && <Form interviewers={[]} />}
+			{mode === CREATE && <Form interviewers={[]} onCancel={back} />}
 		</article>
 	);
 }
