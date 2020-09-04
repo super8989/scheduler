@@ -64,10 +64,8 @@ function Application(props) {
 				{console.log('state.interviewers', state.interviewers)} */}
 
 				{getAppointmentsForDay(state, state.day).map((appointment) => {
-					const interview = getInterview(state, appointment.interview);
-					console.log('getInterview interview', interview);
-					console.log('appointment', appointment);
-
+					// console.log('getInterview interview', interview);
+					// console.log('appointment', appointment);
 					return (
 						<Appointment
 							{...appointment}
