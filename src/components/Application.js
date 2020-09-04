@@ -52,10 +52,18 @@ function Application(props) {
 			[id]: appointment,
 		};
 
-		setState((prev) => ({
-			...prev,
-			appointments,
-		}));
+		return axios
+			.put(`/api/appointments/${id}`, {
+				...state.appointments[id],
+				interview,
+			})
+			.then((res) => {
+				console.log('axios.put res: \n', res);
+				setState((prev) => ({
+					...prev,
+					appointments,
+				}));
+			});
 	}
 
 	return (
