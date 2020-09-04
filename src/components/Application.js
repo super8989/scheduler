@@ -39,8 +39,23 @@ function Application(props) {
 	}, []);
 
 	function bookInterview(id, interview) {
-		console.log('bookInterview id', id);
-		console.log('bookInterview interview', interview);
+		console.log('bookInterview id', id); // id = 2
+		console.log('bookInterview interview', interview); // interview = { student: 'sam', interviewer: 3}
+
+		const appointment = {
+			...state.appointments[id],
+			interview: { ...interview },
+		};
+
+		const appointments = {
+			...state.appointments,
+			[id]: appointment,
+		};
+
+		setState((prev) => ({
+			...prev,
+			appointments,
+		}));
 	}
 
 	return (

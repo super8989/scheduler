@@ -23,6 +23,7 @@ function Appointment(props) {
 		};
 
 		props.bookInterview(id, interview);
+		transition(SHOW);
 	}
 
 	return (
