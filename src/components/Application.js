@@ -22,10 +22,6 @@ function Application(props) {
 	const setDay = (day) => setState((prevState) => ({ ...prevState, day }));
 	// const setDays = (days) => setState((prev) => ({ ...prev, days }));
 
-	// const daysData = axios.get('/api/days');
-	// const appointmentsData = axios.get('/api/appointments');
-	// const interviewersData = axios.get('/api/interviewers');
-
 	useEffect(() => {
 		Promise.all([
 			axios.get('/api/days'),
@@ -41,6 +37,11 @@ function Application(props) {
 			}));
 		});
 	}, []);
+
+	function bookInterview(id, interview) {
+		console.log('bookInterview id', id);
+		console.log('bookInterview interview', interview);
+	}
 
 	return (
 		<main className='layout'>
@@ -71,6 +72,7 @@ function Application(props) {
 							key={appointment.id}
 							interview={getInterview(state, appointment.interview)}
 							interviewers={getInterviewersForDay(state, state.day)}
+							bookInterview={bookInterview}
 						/>
 					);
 				})}
