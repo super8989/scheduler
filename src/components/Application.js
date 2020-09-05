@@ -39,8 +39,8 @@ function Application(props) {
 	}, []);
 
 	function bookInterview(id, interview) {
-		// console.log('bookInterview id', id); // id = 2
-		// console.log('bookInterview interview', interview); // interview = { student: 'sam', interviewer: 3}
+		// id = 2
+		// interview = { student: 'sam', interviewer: 3}
 
 		const appointment = {
 			...state.appointments[id],
@@ -58,7 +58,6 @@ function Application(props) {
 				interview,
 			})
 			.then((res) => {
-				// console.log('axios.put res: \n', res);
 				setState((prev) => ({
 					...prev,
 					appointments,
@@ -67,8 +66,6 @@ function Application(props) {
 	}
 
 	function cancelInterview(id) {
-		// console.log('cancelInterview id:', id);
-
 		const appointment = {
 			...state.appointments[id],
 			interview: null,
@@ -85,13 +82,29 @@ function Application(props) {
 				interview: null,
 			})
 			.then((res) => {
-				// console.log('axios.put res: \n', res);
 				setState((prev) => ({
 					...prev,
 					appointments,
 				}));
 			});
 	}
+
+	const interviewers = getInterviewersForDay(state, state.day);
+
+	const appointments = getAppointmentsForDay(state, state.day).map(
+		(appointment) => {
+			return (
+				<Appointment
+					key={appointment.id}
+					{...appointment}
+					interview={getInterview(state, appointment.interview)}
+					interviewers={interviewers}
+					bookInterview={bookInterview}
+					cancelInterview={cancelInterview}
+				/>
+			);
+		}
+	);
 
 	return (
 		<main className='layout'>
@@ -112,21 +125,7 @@ function Application(props) {
 				/>
 			</section>
 			<section className='schedule'>
-				{/* {console.log('state.appointments', state.appointments)}
-				{console.log('state.interviewers', state.interviewers)} */}
-				{getAppointmentsForDay(state, state.day).map((appointment) => {
-					// console.log('getInterview interview', interview); console.log('appointment', appointment);
-					return (
-						<Appointment
-							{...appointment}
-							key={appointment.id}
-							interview={getInterview(state, appointment.interview)}
-							interviewers={getInterviewersForDay(state, state.day)}
-							bookInterview={bookInterview}
-							cancelInterview={cancelInterview}
-						/>
-					);
-				})}
+				{appointments}
 				<Appointment key={'last'} time={'5PM'} />
 			</section>
 		</main>
