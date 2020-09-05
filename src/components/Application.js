@@ -39,8 +39,8 @@ function Application(props) {
 	}, []);
 
 	function bookInterview(id, interview) {
-		console.log('bookInterview id', id); // id = 2
-		console.log('bookInterview interview', interview); // interview = { student: 'sam', interviewer: 3}
+		// console.log('bookInterview id', id); // id = 2
+		// console.log('bookInterview interview', interview); // interview = { student: 'sam', interviewer: 3}
 
 		const appointment = {
 			...state.appointments[id],
@@ -58,7 +58,34 @@ function Application(props) {
 				interview,
 			})
 			.then((res) => {
-				console.log('axios.put res: \n', res);
+				// console.log('axios.put res: \n', res);
+				setState((prev) => ({
+					...prev,
+					appointments,
+				}));
+			});
+	}
+
+	function cancelInterview(id) {
+		// console.log('cancelInterview id:', id);
+
+		const appointment = {
+			...state.appointments[id],
+			interview: null,
+		};
+
+		const appointments = {
+			...state.appointments,
+			[id]: appointment,
+		};
+
+		return axios
+			.delete(`/api/appointments/${id}`, {
+				...state.appointments[id],
+				interview: null,
+			})
+			.then((res) => {
+				// console.log('axios.put res: \n', res);
 				setState((prev) => ({
 					...prev,
 					appointments,
@@ -96,6 +123,7 @@ function Application(props) {
 							interview={getInterview(state, appointment.interview)}
 							interviewers={getInterviewersForDay(state, state.day)}
 							bookInterview={bookInterview}
+							cancelInterview={cancelInterview}
 						/>
 					);
 				})}
