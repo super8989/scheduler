@@ -16,6 +16,8 @@ const CREATE = 'CREATE';
 const SAVING = 'SAVING';
 const CONFIRM = 'CONFIRM';
 const EDIT = 'EDIT';
+const ERROR_SAVE = 'ERROR_SAVE';
+const ERROR_DELETE = 'ERROR_DELETE';
 
 function Appointment(props) {
 	const { id, time, interview, interviewers } = props;
@@ -28,13 +30,19 @@ function Appointment(props) {
 		};
 
 		transition(SAVING);
-		props.bookInterview(id, interview).then(() => transition(SHOW));
+		props
+			.bookInterview(id, interview)
+			.then(() => transition(SHOW))
+			.catch((error) => transition(ERROR_SAVE, true));
 	}
 
 	// Delete the appointment from database
 	function remove() {
 		transition(SAVING);
-		props.cancelInterview(id).then(() => transition(EMPTY));
+		props
+			.cancelInterview(id)
+			.then(() => transition(EMPTY))
+			.catch((error) => transition(ERROR_DELETE, true));
 	}
 
 	// Render a delete confirm component
