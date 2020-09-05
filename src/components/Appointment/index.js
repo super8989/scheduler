@@ -6,6 +6,7 @@ import Empty from 'components/Appointment/Empty';
 import Form from 'components/Appointment/Form';
 import Status from 'components/Appointment/Status';
 import Confirm from 'components/Appointment/Confirm';
+import Error from 'components/Appointment/Error';
 import useVisualMode from 'hooks/useVisualMode';
 
 import 'components/Appointment/styles.scss';
@@ -14,6 +15,7 @@ const EMPTY = 'EMPTY';
 const SHOW = 'SHOW';
 const CREATE = 'CREATE';
 const SAVING = 'SAVING';
+const DELETING = 'DELETING';
 const CONFIRM = 'CONFIRM';
 const EDIT = 'EDIT';
 const ERROR_SAVE = 'ERROR_SAVE';
@@ -29,7 +31,7 @@ function Appointment(props) {
 			interviewer,
 		};
 
-		transition(SAVING);
+		transition(SAVING, true);
 		props
 			.bookInterview(id, interview)
 			.then(() => transition(SHOW))
@@ -37,8 +39,8 @@ function Appointment(props) {
 	}
 
 	// Delete the appointment from database
-	function remove() {
-		transition(SAVING);
+	function cancelInterview() {
+		transition(DELETING, true);
 		props
 			.cancelInterview(id)
 			.then(() => transition(EMPTY))
@@ -70,12 +72,13 @@ function Appointment(props) {
 			{mode === CREATE && (
 				<Form interviewers={interviewers} onCancel={back} onSave={save} />
 			)}
-			{mode === SAVING && <Status message={'Loading'} />}
+			{mode === SAVING && <Status message={'Booking your interview'} />}
+			{mode === DELETING && <Status message={'Cancelling your interview'} />}
 			{mode === CONFIRM && (
 				<Confirm
 					message={'Delete your booking?'}
 					onCancel={back}
-					onConfirm={remove}
+					onConfirm={cancelInterview}
 				/>
 			)}
 			{mode === EDIT && (
@@ -86,6 +89,9 @@ function Appointment(props) {
 					onCancel={back}
 					onSave={save}
 				/>
+			)}
+			{(mode === ERROR_DELETE || mode === ERROR_SAVE) && (
+				<Error onClose={back} message={'Please try again'} />
 			)}
 		</article>
 	);
