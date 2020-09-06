@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 
 import DayList from 'components/DayList';
@@ -34,7 +34,7 @@ function Application(props) {
 				interviewers: all[2].data,
 			}));
 		});
-	}, []);
+	}, [setState]);
 
 	const interviewers = getInterviewersForDay(state, state.day);
 
