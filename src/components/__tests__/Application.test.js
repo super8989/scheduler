@@ -5,21 +5,55 @@ import {
 	waitForElement,
 	fireEvent,
 	prettyDOM,
+	getByText,
+	getAllByTestId,
+	getByAltText,
+	getByPlaceholderText,
 } from '@testing-library/react';
 import Application from 'components/Application';
 
+// ByLabelText, ByText, ByDisplayValue, ByTitle, ByRole
+
 afterEach(cleanup);
 
-it('defaults to Monday and changes the schedule when a new day is selected', () => {
-	const { getByText } = render(<Application />);
+describe('Application', () => {
+	it('defaults to Monday and changes the schedule when a new day is selected', () => {
+		const { getByText } = render(<Application />);
 
-	return waitForElement(() => getByText('Monday'))
-		.then(() => {
+		return waitForElement(() => getByText('Monday')).then(() => {
 			fireEvent.click(getByText('Tuesday'));
 			expect(getByText('Leopold Silvers')).toBeInTheDocument();
-		})
-		.then(() => {
-			fireEvent.click(getByText('Monday'));
-			expect(getByText('Archie Cohen')).toBeInTheDocument();
 		});
+	});
+
+	// Using async await instead of promise
+	// it('defaults to Monday and changes the schedule when a new day is selected', async () => {
+	// 	const { getByText } = render(<Application />);
+
+	// 	await waitForElement(() => getByText('Monday'));
+
+	// 	fireEvent.click(getByText('Tuesday'));
+	// 	expect(getByText('Leopold Silvers')).toBeInTheDocument();
+	// });
+
+	it('loads data, books an interview and reduces the spots remaining for Monday by 1', async () => {
+		const { container } = render(<Application />);
+
+		await waitForElement(() => getAllByTestId(container, 'appointment'));
+
+		const appointments = getAllByTestId(container, 'appointment');
+		const appointment = getAllByTestId(container, 'appointment')[0];
+
+		fireEvent.click(getByAltText(appointment, 'Add'));
+
+		fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
+			target: { value: 'Lydia' },
+		});
+
+		fireEvent.click(getByAltText(appointment, 'Sylvia Palmer'));
+
+		fireEvent.click(getByText(appointment, 'Save'));
+
+		console.log(prettyDOM(appointment));
+	});
 });
