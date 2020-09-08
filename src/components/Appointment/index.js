@@ -73,7 +73,7 @@ function Appointment(props) {
 				<Form interviewers={interviewers} onCancel={back} onSave={save} />
 			)}
 			{mode === SAVING && <Status message={'Saving'} />}
-			{mode === DELETING && <Status message={'Cancelling your interview'} />}
+			{mode === DELETING && <Status message={'Deleting'} />}
 			{mode === CONFIRM && (
 				<Confirm
 					message={'Delete your booking?'}
