@@ -57,7 +57,7 @@ function Appointment(props) {
 	}
 
 	return (
-		<article className='appointment'>
+		<article className='appointment' data-testid='appointment'>
 			<Header time={time} />
 			{/* {interview ? (<Show student={interview.student} interviewer={interview.interviewer} onEdit onDelete />) : (<Empty onAdd/> )} */}
 			{mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
