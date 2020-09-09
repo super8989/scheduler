@@ -110,7 +110,7 @@ describe('Application', () => {
 		expect(getByText(day, /2 spots remaining/i)).toBeInTheDocument();
 	});
 
-	it('loads data, cancels an interview and increases the spots remaining for Monday by 1', async () => {
+	it('loads data, edits an interview and keeps the spots remaining for Monday the same', async () => {
 		// 1. Render the Application.
 		const { container, debug } = render(<Application />);
 
