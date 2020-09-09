@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {
 	render,
 	cleanup,
@@ -155,5 +156,35 @@ describe('Application', () => {
 		);
 
 		expect(getByText(day, /1 spot remaining/i)).toBeInTheDocument();
+	});
+
+	it('shows the save error when failing to save an appointment', async () => {
+		axios.put.mockRejectedValueOnce();
+
+		const { container, debug } = render(<Application />);
+
+		await waitForElement(() => getAllByTestId(container, 'appointment'));
+
+		const appointment = getAllByTestId(container, 'appointment')[0];
+
+		fireEvent.click(getByAltText(appointment, 'Add'));
+
+		fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
+			target: { value: 'Iron Man' },
+		});
+
+		fireEvent.click(getByAltText(appointment, 'Sylvia Palmer'));
+
+		fireEvent.click(getByText(appointment, 'Save'));
+
+		expect(getByText(appointment, 'Saving')).toBeInTheDocument();
+
+		await waitForElement(() => getByText(appointment, 'Error'));
+
+		expect(getByText(appointment, 'Error')).toBeInTheDocument();
+
+		fireEvent.click(getByAltText(appointment, 'Close'));
+
+		expect(getByAltText(appointment, 'Add')).toBeInTheDocument();
 	});
 });
