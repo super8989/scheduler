@@ -187,4 +187,33 @@ describe('Application', () => {
 
 		expect(getByAltText(appointment, 'Add')).toBeInTheDocument();
 	});
+
+	it('shows the delete error when failing to deleting an appointment', async () => {
+		axios.delete.mockRejectedValueOnce();
+
+		const { container, debug } = render(<Application />);
+
+		await waitForElement(() => getByText(container, 'Archie Cohen'));
+
+		const appointment = getAllByTestId(
+			container,
+			'appointment'
+		).find((appointment) => queryByText(appointment, 'Archie Cohen'));
+
+		fireEvent.click(getByAltText(appointment, 'Delete'));
+
+		expect(getByText(appointment, 'Delete your booking?')).toBeInTheDocument();
+
+		fireEvent.click(getByText(appointment, 'Confirm'));
+
+		expect(getByText(appointment, 'Deleting')).toBeInTheDocument();
+
+		await waitForElement(() => getByText(appointment, 'Error'));
+
+		expect(getByText(appointment, 'Error')).toBeInTheDocument();
+
+		fireEvent.click(getByAltText(appointment, 'Close'));
+
+		expect(getByText(appointment, 'Archie Cohen')).toBeInTheDocument();
+	});
 });
