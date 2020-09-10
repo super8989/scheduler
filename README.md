@@ -9,6 +9,16 @@
 - User can select from a list of available interviewers for the day
 - Number of available appointments will be updated following creation/deletion of appointments
 
+## Screenshots
+
+!["screenshot of homepage"](https://github.com/super8989/scheduler/blob/master/docs/01Home.png?raw=true)
+
+!["screenshot of homepage"](https://github.com/super8989/scheduler/blob/master/docs/02Create.png?raw=true)
+
+!["screenshot of homepage"](https://github.com/super8989/scheduler/blob/master/docs/03Added.png?raw=true)
+
+!["screenshot of homepage"](https://github.com/super8989/scheduler/blob/master/docs/04Delete.png?raw=true)
+
 ## Tech Stack
 
 - ReactJS
