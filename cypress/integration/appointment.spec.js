@@ -16,6 +16,6 @@ describe('Appointments', () => {
 
 		cy.contains('Deleting').not();
 
-		cy.contains('.appointment__card--show', 'Archie Cohen').not();
+		cy.contains('.appointment__card--show', 'Archie Cohen').should('not.exist');
 	});
 });
