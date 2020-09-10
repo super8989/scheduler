@@ -19,9 +19,9 @@
 
 !["screenshot of homepage"](https://github.com/super8989/scheduler/blob/master/docs/04Delete.png?raw=true)
 
-## Tech Stack
+## Technical Specifications
 
-- ReactJS
+- React
 - JavaScript
 - SASS
 - PostgreSQL
