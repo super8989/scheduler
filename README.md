@@ -7,7 +7,7 @@
 - User can select days to see number of available appointments
 - User can create, delete and edit appointments
 - User can select from a list of available interviewers for the day
-- Number of available appointments will be updated following creation/deletion of appointments
+- Number of available appointments are updated following creation/deletion of appointments
 
 ## Screenshots
 
